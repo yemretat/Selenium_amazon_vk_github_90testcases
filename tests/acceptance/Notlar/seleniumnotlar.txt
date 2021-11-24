@@ -1,0 +1,110 @@
+//Kendin her yapmadan önce git kontrol et f12 ile
+
+WebDriver driver = new ChromeDriver();
+driver.get("https://wwww.google.com/)"
+driver.manage().window.maximize();
+driver.findElement(By.name("q")).sendKeys("Java")
+Thread.sleep(1000);
+driver.findElement(By.className("gNO89b")).click() //classı alırken
+--------------------------------------------------
+By.id("createacc").click();
+driver.findElement(By.linkText("Kullanıcı adınızı mı unuttunuz?")).click()
+By.partialLinkText("Kullanıcı")).click();
+
+------------------------------------------------------
+Xpath
+driver.findElement(By.xpath("//div[@class='_4bl9 _ihf']")
+//bu iki slash kullanılıyor
+//button[text()="Log In"] --> içindeki text ile alma
+//div[@class='_4bl9 _ihf']
+//div[contains(@class,'_4bl9')]
+//input[starts-with(@class,'glFyf')]
+//input[starts-with@maxlength,'20')]
+//div[@class='_4bl9 _ihf' or @class='_6lux']
+//form[@class='_featuredLogin__formContainer' and @data-testid='royal_login_form']
+//input[@value="Male"]
+//input[starts-with(@class,'glFyf') or @type='text']
+//input[@data-testid="royal_email"]
+//input[starts-with(@value,'comet')]
+(//div[@class='control-group'])[7]//input --> Bu yine liste döner listeyi dön
+
+----------------------------------------------------
+// adam firefox driver kullanıyor daha iyi diyor
+driver.findElement(By.cssSelector(""))
+css-selector
+---------------------
+input[class=gNO89b]
+div[id=footer] ------------------------> div#footer  , divlerin içerisinde idsi footer olanları al
+input.gNO89b  --------> bu input tagı classı gNO89b'ye eşit olanlar
+.gNO89b ise herhangi birinin classı buna eşitse
+._8iep._8icy
+#footer ise id'si footer olanları döner
+
+birden fazla class var ise aralarına nokta konur.
+
+input[maxlength*='8'] //bu da input tagindeki maxlength 248 gibi 8 içinde varsa
+
+mesela class gLfy tskU
+input[class*=gL] bu bile okeyler
+div[class^='R'] classımız R ile başlıyor
+
+html>body>div>:nth-child(5)  divin altındaki 5.çocuka git çocuklar 1den başlar
+div[class^=_4bl7]>:nth-child(1) //first-child , last-child vs de kullanabiliriz
+div[id$=b] //idleri b ile biten
+
+ul.erkvQe>:first-of-type veya nth-child(3) //bu tarz alımlar da yapılabilir.
+--------------------------------------------
+drop-down , select classlara falan bakıyor
+WebElement isim =driver.findElement(By.name("firstname"));
+isim.sendKeys("Ömer");
+//Liste şeklinde bulup üzerlerinde gezinme findElements kullanımı
+
+List<WebElement> list =driver.findElements(By.cssSelector("div[dir=ltr]>:nth-child(24)>input"))
+for(int i=0;i<list.size();i++)
+{
+    list.get(i).click();
+    Thread.sleep(500);
+}
+
+select classda
+WebElement element =driver.findElement(By.cssSelector("#continents"));
+Select slc = new Select(element);
+slc.selectByVisibleText("Australia"); //indexle vs de alabiliriz
+
+--------------------------------------------------
+Action classlar ile birlikte
+tıklamadan üzerine gezinme yeri
+
+Actions action=new Actions(driver);
+List<WebElement> menubars=driver.findElements(By.xpath("//ul[@role='menubar']//li"));
+
+for(WebElement menubar:menubars){
+action.moveToElement(menubar).perform();
+Thread.sleep(500);
+}
+-----------------------------------------------------
+//Bununla beraber drag and drop yapabiliriz
+WebElement seoul=driver.findElement(By.id("box5"));
+WebElement southKorea=driver.findElement(By.id("box105"));
+
+Actions actions = new Actions(driver);
+actions.dragAndDrop(seoul,southKorea).build().perform()
+
+
+
+
+// alert ve pencere kullanımı
+
+
+
+
+
+
+
+
+
+
+
+
+
+
